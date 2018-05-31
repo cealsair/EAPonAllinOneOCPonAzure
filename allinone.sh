@@ -30,9 +30,6 @@ domain=$(grep search /etc/resolv.conf | awk '{print $2}')
 
 ps -ef | grep allinone.sh > cmdline.out
 
-echo ${RHSM_USER} > /tmp/save
-echo ${RHSM_PASSWORD} >> /tmp/save
-echo ${RHSM_POOL} >> /tmp/save
 swapoff -a
 subscription-manager register --username=${RHSM_USER} --password=${RHSM_PASSWORD}
 subscription-manager attach --pool=${RHSM_POOL}
