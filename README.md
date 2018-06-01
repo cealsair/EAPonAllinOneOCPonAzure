@@ -27,6 +27,15 @@ Supply a username which will be used for both SSH access and for the OpenShift O
 #### Admin Password
 Supply a password which will be used for the Origin web console.
 
+#### Rhsm User
+Red Hat user name to be used for system registration.
+
+#### Rhsm Password
+Red Hat password to be used for system registration.
+
+#### Rhsm Pool
+Subscription pool to be used for the installation. This apha-numeric value can be found under https://access.redhat.com/management/products
+
 #### Ssh Key Data
 You will need a SSH RSA public key for access if one currently does not exist on your system. Please supply your Public SSH key only. 
 For example, in Linux the key can be located at ~/.ssh/id_rsa.pub. Make sure to copy and paste the **ENTIRE** contents of the file ~/.ssh/id_rsa.pub into this input field.
