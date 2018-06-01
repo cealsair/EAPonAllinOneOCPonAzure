@@ -34,7 +34,7 @@ swapoff -a
 subscription-manager register --username=${RHSM_USER} --password=${RHSM_PASSWORD}
 subscription-manager attach --pool=${RHSM_POOL}
 subscription-manager repos --disable="*" --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-server-ose-3.9-rpms" --enable="rhel-7-fast-datapath-rpms" --enable="rhel-7-server-ansible-2.4-rpms"
-yum install -y wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct httpd-tools pyOpenSSL ansible PyYAML docker python-ipaddress
+yum install -y wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct httpd-tools pyOpenSSL ansible
 mkdir -p /usr/share/ansible
 cd /usr/share/ansible/
 git clone https://github.com/openshift/openshift-ansible
@@ -42,19 +42,6 @@ cd openshift-ansible
 git checkout release-3.9
 chmod 755 -R /usr/share/ansible/openshift-ansible
 htpasswd -c -b /etc/origin/master/htpasswd ${AUSERNAME} ${PASSWORD}
-
-cat <<EOF > /etc/sysconfig/docker-storage-setup
-DEVS='/dev/sdc'
-VG=docker_vol
-DATA_SIZE=95%VG
-STORAGE_DRIVER=overlay2
-CONTAINER_ROOT_LV_NAME=dockerlv
-CONTAINER_ROOT_LV_MOUNT_PATH=/var/lib/docker
-CONTAINER_ROOT_LV_SIZE=100%FREE
-EOF
-
-systemctl start docker
-systemctl enable docker
 
 cat <<EOF > /etc/ansible/hosts
 [OSEv3:children]
@@ -103,4 +90,5 @@ ${RESOURCEGROUP} ansible_connection=local
 ${RESOURCEGROUP} openshift_hostname=${RESOURCEGROUP} openshift_node_labels="{'role':'master','region':'app','region': 'infra'}" openshift_schedulable=true ansible_connection=local
 EOF
 
+ansible-playbook -i /etc/ansible/hosts /usr/share/ansible/openshift-ansible/playbooks/prerequisites.yml
 ansible-playbook -i /etc/ansible/hosts /usr/share/ansible/openshift-ansible/playbooks/deploy_cluster.yml
