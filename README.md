@@ -61,7 +61,7 @@ A notification will pop up in the top right notifying you of the deployment:
 
 <img src="https://github.com/cealsair/MicroProfileThorntailOnAzure/blob/master/images/12_OriginDeployInProgress.png" width="500">
 
-The deployment will take 30-60 minutes. Once completed, the notification will display:
+The deployment will take about 50 minutes. Once completed, the notification will display:
 
 <img src="https://github.com/cealsair/MicroProfileThorntailOnAzure/blob/master/images/13_DeploySucceeded.png" width="500">
 
