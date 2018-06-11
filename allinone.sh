@@ -68,6 +68,7 @@ openshift_master_cluster_hostname=${RESOURCEGROUP}.${FULLDOMAIN}
 openshift_master_cluster_public_hostname=${RESOURCEGROUP}.${FULLDOMAIN}
 openshift_enable_service_catalog=false
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+openshift_master_manage_htpasswd=false
 oreg_url_master=registry.access.redhat.com/openshift3/ose-\${component}:\${version}
 
 oreg_url_node=registry.access.redhat.com/openshift3/ose-\${component}:\${version}
